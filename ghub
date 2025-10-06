@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# ghub - Git add, commit and push to GitHub remote
+# Usage: ghub "commit message"
+
+if [ -z "$1" ]; then
+    echo "Error: Please provide a commit message"
+    echo "Usage: ghub \"your commit message\""
+    exit 1
+fi
+
+# Add all changes
+git add .
+
+# Commit with provided message
+git commit -m "$1"
+
+# Push to GitHub remote
+git push github main
+
+echo "Successfully pushed to GitHub!"
