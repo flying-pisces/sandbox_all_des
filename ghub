@@ -9,8 +9,18 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-# Add all changes
-git add .
+# Remove GitLab-specific files if they exist
+rm -f glab
+rm -f README.md
+
+# Use GitHub-specific README
+if [ -f README-github.md ]; then
+    cp README-github.md README.md
+fi
+
+# Add all changes except GitLab-related files
+git add -A
+git reset -- glab 2>/dev/null
 
 # Commit with provided message
 git commit -m "$1"
